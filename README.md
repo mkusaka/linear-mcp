@@ -86,15 +86,21 @@ The server currently supports the following operations:
 - ✅ Search issues with filtering
 - ✅ Associate issues with projects
 - ✅ Create parent/child issue relationships
+- ✅ Update status of a single issue
+- ✅ Get issue information by ID
 
 ### Project Management
 - ✅ Create projects with associated issues
 - ✅ Get project information
 - ✅ Associate issues with projects
+- ✅ Search projects by name
 
 ### Team Management
 - ✅ Get team information (with states and workflow details)
 - ✅ Access team states and labels
+
+### User Management
+- ✅ Get current user information
 
 ### Authentication
 - ✅ Personal Access Token (PAT) authentication
@@ -103,8 +109,6 @@ The server currently supports the following operations:
 ### Batch Operations
 - ✅ Bulk issue creation
 - ✅ Bulk issue deletion
-
-### Bulk Updates (In Testing)
 - 🚧 Bulk issue updates (parallel processing implemented, needs testing)
 
 ## Features in Development
