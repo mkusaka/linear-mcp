@@ -10,6 +10,7 @@ import {
   SearchIssuesInput,
   SearchIssuesResponse,
   DeleteIssueResponse,
+  GetIssueResponse,
   Issue,
   IssueBatchResponse
 } from '../features/issues/types/issue.types.js';
@@ -161,6 +162,11 @@ export class LinearGraphQLClient {
   async getProject(id: string): Promise<ProjectResponse> {
     const { GET_PROJECT_QUERY } = await import('./queries.js');
     return this.execute<ProjectResponse>(GET_PROJECT_QUERY, { id });
+  }
+
+  async getIssue(id: string): Promise<GetIssueResponse> {
+    const { GET_ISSUE_QUERY } = await import('./queries.js');
+    return this.execute<GetIssueResponse>(GET_ISSUE_QUERY, { id });
   }
 
   // Search projects
