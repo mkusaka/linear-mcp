@@ -364,6 +364,25 @@ export const toolSchemas = {
     },
   },
 
+  linear_update_issue_status: {
+    name: 'linear_update_issue_status',
+    description: 'Update the status of a single issue',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        id: {
+          type: 'string',
+          description: 'Issue identifier (e.g., ENG-123)',
+        },
+        stateId: {
+          type: 'string',
+          description: 'New state ID for the issue',
+        },
+      },
+      required: ['id', 'stateId'],
+    },
+  },
+
   linear_search_projects: {
     name: 'linear_search_projects',
     description: 'Search for projects by name',

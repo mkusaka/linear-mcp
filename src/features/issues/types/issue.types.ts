@@ -61,6 +61,11 @@ export interface GetIssueInput {
   id: string;
 }
 
+export interface UpdateIssueStatusInput {
+  id: string;
+  stateId: string;
+}
+
 /**
  * Response types for issue operations
  */
@@ -132,6 +137,7 @@ export interface IssueHandlerMethods {
   handleCreateIssue(args: CreateIssueInput): Promise<BaseToolResponse>;
   handleCreateIssues(args: CreateIssuesInput): Promise<BaseToolResponse>;
   handleBulkUpdateIssues(args: BulkUpdateIssuesInput): Promise<BaseToolResponse>;
+  handleUpdateIssueStatus(args: UpdateIssueStatusInput): Promise<BaseToolResponse>;
   handleSearchIssues(args: SearchIssuesInput): Promise<BaseToolResponse>;
   handleGetIssue(args: GetIssueInput): Promise<BaseToolResponse>;
   handleDeleteIssue(args: DeleteIssueInput): Promise<BaseToolResponse>;
