@@ -57,6 +57,10 @@ export interface DeleteIssuesInput {
   ids: string[];
 }
 
+export interface GetIssueInput {
+  id: string;
+}
+
 /**
  * Response types for issue operations
  */
@@ -116,6 +120,10 @@ export interface DeleteIssueResponse {
   };
 }
 
+export interface GetIssueResponse {
+  issue: Issue;
+}
+
 /**
  * Handler method types
  */
@@ -125,6 +133,7 @@ export interface IssueHandlerMethods {
   handleCreateIssues(args: CreateIssuesInput): Promise<BaseToolResponse>;
   handleBulkUpdateIssues(args: BulkUpdateIssuesInput): Promise<BaseToolResponse>;
   handleSearchIssues(args: SearchIssuesInput): Promise<BaseToolResponse>;
+  handleGetIssue(args: GetIssueInput): Promise<BaseToolResponse>;
   handleDeleteIssue(args: DeleteIssueInput): Promise<BaseToolResponse>;
   handleDeleteIssues(args: DeleteIssuesInput): Promise<BaseToolResponse>;
 }

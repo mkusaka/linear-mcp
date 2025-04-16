@@ -10,11 +10,13 @@ import {
   SearchIssuesInput,
   DeleteIssueInput,
   DeleteIssuesInput,
+  GetIssueInput,
   CreateIssueResponse,
   CreateIssuesResponse,
   UpdateIssuesResponse,
   SearchIssuesResponse,
   DeleteIssueResponse,
+  GetIssueResponse,
   Issue,
   IssueBatchResponse
 } from '../types/issue.types.js';
@@ -197,6 +199,26 @@ export class IssueHandler extends BaseHandler implements IssueHandlerMethods {
       );
     } catch (error) {
       this.handleError(error, 'delete issues');
+    }
+  }
+
+  /**
+   * Retrieves a single issue by ID.
+   */
+  async handleGetIssue(args: GetIssueInput): Promise<BaseToolResponse> {
+    try {
+      const client = this.verifyAuth();
+      this.validateRequiredParams(args, ['id']);
+
+      const result = await client.getIssue(args.id) as GetIssueResponse;
+
+      if (!result.issue) {
+        throw new Error(`Issue with ID ${args.id} not found`);
+      }
+
+      return this.createJsonResponse(result);
+    } catch (error) {
+      this.handleError(error, 'get issue');
     }
   }
 }

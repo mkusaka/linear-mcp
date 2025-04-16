@@ -349,6 +349,21 @@ export const toolSchemas = {
     },
   },
 
+  linear_get_issue: {
+    name: 'linear_get_issue',
+    description: 'Get issue information by ID',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        id: {
+          type: 'string',
+          description: 'Issue identifier (e.g., ENG-123)',
+        },
+      },
+      required: ['id'],
+    },
+  },
+
   linear_search_projects: {
     name: 'linear_search_projects',
     description: 'Search for projects by name',
