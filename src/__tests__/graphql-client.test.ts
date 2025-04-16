@@ -548,6 +548,64 @@ describe('LinearGraphQLClient', () => {
       );
     });
   });
+  
+  describe('getIssue', () => {
+    it('should successfully fetch an issue by ID', async () => {
+      const mockResponse = {
+        data: {
+          issue: {
+            id: 'issue-1',
+            identifier: 'TEST-1',
+            title: 'Test Issue 1',
+            description: 'Test description',
+            url: 'https://linear.app/test/issue/TEST-1',
+            state: {
+              id: 'state-1',
+              name: 'Todo',
+              type: 'unstarted',
+              color: '#ff0000'
+            },
+            assignee: {
+              id: 'user-1',
+              name: 'Test User',
+              email: 'test@example.com'
+            },
+            team: {
+              id: 'team-1',
+              name: 'Team 1',
+              key: 'TEAM1'
+            },
+            priority: 2,
+            labels: {
+              nodes: []
+            },
+            createdAt: '2023-01-01T00:00:00Z',
+            updatedAt: '2023-01-02T00:00:00Z'
+          }
+        }
+      };
+
+      mockRawRequest.mockResolvedValueOnce(mockResponse);
+
+      const result = await graphqlClient.getIssue('TEST-1');
+
+      expect(result).toEqual(mockResponse.data);
+      expect(mockRawRequest).toHaveBeenCalledWith(
+        expect.any(String),
+        expect.objectContaining({
+          id: 'TEST-1'
+        })
+      );
+    });
+
+    it('should handle issue fetch errors', async () => {
+      mockRawRequest.mockRejectedValueOnce(new Error('Issue fetch failed'));
+
+      await expect(graphqlClient.getIssue('TEST-1')).rejects.toThrow(
+        'GraphQL operation failed: Issue fetch failed'
+      );
+    });
+  });
 
   describe('Label Operations', () => {
     it('should successfully create labels', async () => {
