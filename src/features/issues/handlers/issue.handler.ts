@@ -7,6 +7,7 @@ import {
   CreateIssueInput,
   CreateIssuesInput,
   BulkUpdateIssuesInput,
+  UpdateIssueStatusInput,
   SearchIssuesInput,
   DeleteIssueInput,
   DeleteIssuesInput,
@@ -219,6 +220,32 @@ export class IssueHandler extends BaseHandler implements IssueHandlerMethods {
       return this.createJsonResponse(result);
     } catch (error) {
       this.handleError(error, 'get issue');
+    }
+  }
+
+  /**
+   * Updates the status of a single issue.
+   */
+  async handleUpdateIssueStatus(args: UpdateIssueStatusInput): Promise<BaseToolResponse> {
+    try {
+      const client = this.verifyAuth();
+      this.validateRequiredParams(args, ['id', 'stateId']);
+
+      const result = await client.updateIssue(args.id, { stateId: args.stateId }) as UpdateIssuesResponse;
+
+      if (!result.issueUpdate.success) {
+        throw new Error('Failed to update issue status');
+      }
+
+      const updatedIssue = result.issueUpdate.issues[0];
+
+      return this.createResponse(
+        `Successfully updated status of issue ${updatedIssue.identifier}\n` +
+        `Title: ${updatedIssue.title}\n` +
+        `URL: ${updatedIssue.url}`
+      );
+    } catch (error) {
+      this.handleError(error, 'update issue status');
     }
   }
 }
