@@ -20,6 +20,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@jest/globals": "^29.7.0",
     "@types/dotenv": "^8.2.3",
     "@types/express": "^5.0.0",
     "@types/jest": "^29.5.14",
@@ -39,5 +40,6 @@
     "@modelcontextprotocol/sdk": "^1.4.0",
     "graphql": "^16.10.0",
     "graphql-tag": "^2.12.6"
-  }
+  },
+  "packageManager": "pnpm@11.5.2"
 }
